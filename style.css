@@ -1,0 +1,7 @@
+#sidebar {
+  width: 400px;
+  top: 10px;
+  left: 10px;
+  height: calc(100vh - 20px);
+  z-index: 9999;
+}
