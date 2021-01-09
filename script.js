@@ -2,6 +2,26 @@ var data = {};
 var groups = {};
 var map;
 
+var updateSidebar = function(marker) {
+
+  // Get data bound to the marker
+  var d = marker.options.placeInfo;
+
+  if (L.DomUtil.hasClass(marker._icon, 'markerActive')) {
+    L.DomUtil.removeClass(marker._icon, 'markerActive');
+
+
+    $('header').removeClass('black-50');
+    $('#placeInfo h2').html('');
+    $('#placeInfo div').html('');
+  } else {
+    $('header').addClass('black-50');
+    L.DomUtil.addClass(marker._icon, 'markerActive');
+    $('#placeInfo h2').html(d.Place);
+    $('#placeInfo div').html(d.Description);
+  }
+}
+
 var addMarkers = function(data) {
 
   for (var i in data) {
@@ -17,12 +37,23 @@ var addMarkers = function(data) {
         icon: L.icon({
           iconUrl: d.Icon,
           iconSize: [ iconWidth, iconHeight ],
-          iconAnchor: [ iconWidth/2, iconHeight/2 ] // middle of icon represents point center
-        })
-      }
-    ).on('click', function(d) {
-      console.log(d) // !!!!!!!!!!!!!!!!!!!!!!!!!! need to pass current marker's data?
-      $('#placeName').html(d.Place)
+          iconAnchor: [ iconWidth/2, iconHeight/2 ], // middle of icon represents point center
+          className: 'br1',
+        }),
+        // Pass place data
+        placeInfo: d
+      },
+    ).on('click', function(e) {
+      map.flyTo(e.latlng, 12);
+
+      updateSidebar(this);
+/*
+      L.DomUtil.addClass(this._icon, 'markerActive');
+
+      var d = this.options.placeInfo;
+
+      $('#placeInfo h2').html(d.Place);
+      $('#placeInfo div').html(d.Description);*/
     });
     
     // Add this new place marker to an appropriate group
@@ -30,8 +61,12 @@ var addMarkers = function(data) {
 
   }
 
+  // Transform each array of markers into layerGroup
   for (var g in groups) {
     groups[g] = L.layerGroup(groups[g]);
+
+    // By default, show all markers
+    groups[g].addTo(map);
   }
 
   L.control.layers({}, groups, {collapsed: false}).addTo(map);

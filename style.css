@@ -1,7 +1,12 @@
 #sidebar {
-  width: 400px;
+  width: 460px;
   top: 10px;
   left: 10px;
-  height: calc(100vh - 20px);
+  max-height: calc(100vh - 20px);
   z-index: 9999;
+  overflow-y: scroll;
+}
+
+.markerActive {
+  border: 2px solid orange;
 }
