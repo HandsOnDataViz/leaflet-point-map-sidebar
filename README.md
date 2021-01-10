@@ -32,3 +32,9 @@ Each place can have up to 5 images. Only the first image is shown in the
 sidebar. To scroll through the gallery, click an image to bring up a full-screen
 lightbox interface. The lightbox will say how many images there are, and will show
 a caption, source, and link (if available) for each image.
+
+## Hash
+When a place icon is clicked, its name is added to the hash part of the URL. This
+enables you to share a particular place because when the map is loaded initially,
+it activates the place from hash if it exists instead of centering
+on default `mapCenter` (as defined in `settings.js`).
