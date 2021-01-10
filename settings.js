@@ -1,5 +1,6 @@
-// Where to load data from. Choose either a local file, or a Google Sheets
-const dataLocation = 'places.csv';
+// Where to load data from. Choose either a local file, such as `data/places.csv`,
+// or a Google Sheets URL (File > Publish to the Web > CSV )
+const dataLocation = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQCz1kNG2vxDke45Q0H8moWaFZZ-dhRSp34EKD_eMVWE-YjJTFDAcxdXydWSJ26JF4Ap4zlaZD1p9oi/pub?output=csv';
 
 // Map's initial center, and zoom level
 const mapCenter = [41.65, -72.7];

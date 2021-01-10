@@ -8,17 +8,79 @@ var updateSidebar = function(marker) {
   var d = marker.options.placeInfo;
 
   if (L.DomUtil.hasClass(marker._icon, 'markerActive')) {
+    // Deselect current icon
     L.DomUtil.removeClass(marker._icon, 'markerActive');
 
-
+    // Make the map title original color
     $('header').removeClass('black-50');
-    $('#placeInfo h2').html('');
+
+    // Clear placeInfo containers
+    $('#placeInfo h2, #placeInfo h3').html('');
     $('#placeInfo div').html('');
+    $('#googleMaps').addClass('dn').removeClass('dt');
   } else {
+    // Dim map's title
     $('header').addClass('black-50');
+
+    // Clear out active markers from all markers
+    $('.markerActive').removeClass('markerActive');
+
+    // Make clicked marker the new active marker
     L.DomUtil.addClass(marker._icon, 'markerActive');
-    $('#placeInfo h2').html(d.Place);
-    $('#placeInfo div').html(d.Description);
+
+    // Populate place information into the sidebar
+    $('#placeInfo').animate({opacity: 0.5}, 300).promise().done(function() {
+      $('#placeInfo h2').html(d.Name);
+      $('#placeInfo h3').html(d.Subtitle);
+      $('#description').html(d.Description);
+
+      if (d.GoogleMapsLink) {
+        $('#googleMaps').removeClass('dn').addClass('dt').attr('href', d.GoogleMapsLink);
+      } else {
+        $('#googleMaps').addClass('dn').removeClass('dt');
+      }
+
+      $('#gallery').html('');
+
+      // Load up to 5 images
+      for (var i = 1; i <= 5; i++) {
+        var idx = 'Image' + i;
+
+        if (d[idx]) {
+
+          var source = "<em class='normal'>" + d[idx + 'Source'] + '</em>';
+
+          if (source && d[idx + 'SourceLink']) {
+            source = "<a href='" + d[idx + 'SourceLink'] + "'>" + source + "</a>";
+          }
+
+          var a = $('<a/>', {
+            href: d[idx],
+            'data-lightbox': 'gallery',
+            'data-title': ( d[idx + 'Caption'] + ' ' + source )  || '',
+            'data-alt': d.Name,
+            'class': i === 1 ? '' : 'dn'
+          });
+
+          var img = $('<img/>', { src: d[idx], alt: d.Name, class: 'dim' });
+          $('#gallery').append( a.append(img) );
+
+          if (i === 1) {
+            $('#gallery').append(
+              $('<p/>', { class: 'f6 black-50 mt1', html: d[idx + 'Caption'] + ' ' + source })
+            );
+          }
+
+        }
+      }
+
+      $('#placeInfo').animate({ opacity: 1 }, 300);
+
+      // Scroll sidebar to focus on the place's title
+      $('#sidebar').animate({
+        scrollTop: $('header').height() + 25
+      }, 800);
+    })
   }
 }
 
@@ -44,16 +106,9 @@ var addMarkers = function(data) {
         placeInfo: d
       },
     ).on('click', function(e) {
-      map.flyTo(e.latlng, 12);
+      map.flyTo(e.latlng, 11);
 
       updateSidebar(this);
-/*
-      L.DomUtil.addClass(this._icon, 'markerActive');
-
-      var d = this.options.placeInfo;
-
-      $('#placeInfo h2').html(d.Place);
-      $('#placeInfo div').html(d.Description);*/
     });
     
     // Add this new place marker to an appropriate group
@@ -70,14 +125,16 @@ var addMarkers = function(data) {
   }
 
   L.control.layers({}, groups, {collapsed: false}).addTo(map);
+  $('.leaflet-control-layers-overlays').prepend('<h3 class="mv0 f5 black-30">Themes</h3>')
 
 }
 
 /*
- * Loads and parses data from CSV or Google Sheets using PapaParse
+ * Loads and parses data from a CSV (either local, or published
+ * from Google Sheets) using PapaParse
  */
 var loadData = function(loc) {
-
+  
   Papa.parse(loc, {
     header: true,
     download: true,
@@ -111,7 +168,6 @@ var initMap = function() {
   }).addTo(map);
 
   loadData(dataLocation);
-
 }
 
 $('document').ready(initMap);

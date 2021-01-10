@@ -5,6 +5,9 @@
   <meta charset="utf-8">
 
   <title>Leaflet Point Map with Sidebar</title>
+  <link rel="shortcut icon" href="./favicon.png" type="image/x-icon" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Leaflet Point Map with Sidebar with Google Sheets">
   <meta name="author" content="Picturedigits">
 
@@ -20,6 +23,10 @@
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
     crossorigin="anonymous"></script>
 
+  <!-- Read lightbox2 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/css/lightbox.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox.min.js"></script>
+
   <!-- Read PapaParse CSV parsing library -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
 
@@ -32,6 +39,9 @@
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
 
+  <!-- Load Material icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <!-- Read local JavaScript files -->
   <script src="./settings.js"></script>
   <script src="./script.js"></script>
@@ -40,9 +50,7 @@
 
 <body class="helvetica">
 
-  <div id="map" class="vh-100 vw-100"></div>
-
-  <div id="sidebar" class="absolute bg-white ph3 br1 ba b--black-10">
+  <div id="sidebar" class="vh-50 vh-100-ns w-100 w5-ns top-1-ns left-1-ns absolute-ns bg-white ph3 br1 ba b--black-10">
 
     <header>
       <h1 class="f3">
@@ -59,16 +67,27 @@
 
     </header>
 
-    <div id="placeInfo">
-      <h2 class="f4"></h2>
-      <div></div>
-    </div>
+    <article id="placeInfo">
+      <h2 class="f4 mv1"></h2>
+      <h3 class="f5 black-60 mv1"></h3>
+      <div id="gallery"></div>
+      <div id="description"></div>
+
+      <a id="googleMaps" class="shadow-1 mv3 pa3 dn" href="https://google.com">
+        <span class="material-icons dtc v-mid pa2 pr3">location_on</span>
+        <span class="dtc v-mid">View directions, reviews, photos, and opening times on Google Maps</span>
+      </a>
+
+    </article>
 
     <footer class="black-50 f6 pv3">
       More information about this map in this footer.
     </footer>
     
   </div>
+
+  <!-- Map container -->
+  <div id="map" class="vh-50 vh-100-ns vw-100"></div>
 
 </body>
 

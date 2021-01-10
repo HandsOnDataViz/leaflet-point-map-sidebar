@@ -1,12 +1,39 @@
 #sidebar {
-  width: 460px;
-  top: 10px;
-  left: 10px;
-  max-height: calc(100vh - 20px);
   z-index: 9999;
   overflow-y: scroll;
+  opacity: 0.9;
 }
 
+@media screen and (min-width:30em) {
+  #sidebar {
+    max-height: calc(100vh - 2rem);
+    height: auto;
+    width: 460px;
+  }
+}
+
+
 .markerActive {
-  border: 2px solid orange;
+  border: 4px solid rgba(0,0,0,0.1);
+  /* Move up 4px and left 4px to account for border,
+    to make sure the active marker doesn't move */
+  margin: -24px 0 0 -24px !important; 
+}
+
+.leaflet-marker-icon:hover {
+  opacity: 0.8;
+}
+
+a {
+  color: #528e9e;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+.leaflet-control {
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  border-radius: 2px !important;
 }
