@@ -3,6 +3,10 @@ var groups = {};
 var map;
 
 var updateSidebar = function(marker) {
+  
+  location.hash = marker.options.placeInfo.Name
+
+  //location.pathname = location.patnname + '?abc'
 
   // Get data bound to the marker
   var d = marker.options.placeInfo;
@@ -18,6 +22,9 @@ var updateSidebar = function(marker) {
     $('#placeInfo h2, #placeInfo h3').html('');
     $('#placeInfo div').html('');
     $('#googleMaps').addClass('dn').removeClass('dt');
+
+    // Reset hash
+    location.hash = '';
   } else {
     // Dim map's title
     $('header').addClass('black-50');
@@ -51,7 +58,7 @@ var updateSidebar = function(marker) {
           var source = "<em class='normal'>" + d[idx + 'Source'] + '</em>';
 
           if (source && d[idx + 'SourceLink']) {
-            source = "<a href='" + d[idx + 'SourceLink'] + "'>" + source + "</a>";
+            source = "<a href='" + d[idx + 'SourceLink'] + "' target='_blank'>" + source + "</a>";
           }
 
           var a = $('<a/>', {
@@ -62,7 +69,7 @@ var updateSidebar = function(marker) {
             'class': i === 1 ? '' : 'dn'
           });
 
-          var img = $('<img/>', { src: d[idx], alt: d.Name, class: 'dim' });
+          var img = $('<img/>', { src: d[idx], alt: d.Name, class: 'dim br1' });
           $('#gallery').append( a.append(img) );
 
           if (i === 1) {
@@ -78,13 +85,16 @@ var updateSidebar = function(marker) {
 
       // Scroll sidebar to focus on the place's title
       $('#sidebar').animate({
-        scrollTop: $('header').height() + 25
+        scrollTop: $('header').height() + 20
       }, 800);
     })
   }
 }
 
 var addMarkers = function(data) {
+
+  var activeMarker;
+  var hashName = decodeURIComponent( location.hash.substr(1) );
 
   for (var i in data) {
     var d = data[i];
@@ -106,14 +116,14 @@ var addMarkers = function(data) {
         placeInfo: d
       },
     ).on('click', function(e) {
-      map.flyTo(e.latlng, 11);
-
+      map.flyTo(this._latlng, 11);
       updateSidebar(this);
     });
     
     // Add this new place marker to an appropriate group
     groups[d.Group].push(m);
 
+    if (d.Name === hashName) { activeMarker = m; }
   }
 
   // Transform each array of markers into layerGroup
@@ -125,7 +135,10 @@ var addMarkers = function(data) {
   }
 
   L.control.layers({}, groups, {collapsed: false}).addTo(map);
-  $('.leaflet-control-layers-overlays').prepend('<h3 class="mv0 f5 black-30">Themes</h3>')
+  $('.leaflet-control-layers-overlays').prepend('<h3 class="mt0 mb1 f5 black-30">Themes</h3>');
+
+  // If name in hash, activate it
+  if (activeMarker) { activeMarker.fire('click') }
 
 }
 

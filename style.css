@@ -37,3 +37,16 @@ a:hover {
   border: 1px solid rgba(0,0,0,0.1) !important;
   border-radius: 2px !important;
 }
+
+.leaflet-control-layers-expanded {
+  font-size: 1.2em;
+  line-height: 1.2em;
+}
+
+.leaflet-control-layers-expanded label {
+  cursor: pointer;
+}
+
+.leaflet-control-layers-expanded label:hover {
+  opacity: 0.8;
+}
