@@ -27,6 +27,19 @@ Or, after you finish creating your map data in Google Sheets, you can *File > Do
 
 Unlike some of our other Leaflet templates with Google Sheets, you do **not** need to create a Google API key for this tool, because it pulls all data from *one* CSV, and your CSV is available to download by anyone with the link.
 
+## About entering text into the template
+This sidebar map was designed to display multiple paragraphs of text into the *Description* field for each location. Also, the text must be consistent with HTML coding. This means to use *straight* single-quotes (also known as apostrophes) and double-quotes (`"`), *not* curly quotes that are commonly created by word-processor tools. To create a new paragraph, insert a double line-break (`<br><br>`). To enter links, use HTML tags to open in a new browser tab, such as:
+
+```
+.<br><br><a href='https://connecticuthistory.org/bridge-ornaments-help-tell-the-legend-of-the-windham-frog-fight/' target='_blank'>More</a> about Windham's Frog Fight
+```
+
+When working with large amounts of *Description* text, you may find it easiest to first use a text editor tool such as [Atom Editor](https://atom.io), create a file named `temporary.html`, set *View > Toggle Soft Wrap*, and prepare all of your *Description* text there before copying and pasting into the Google Sheet.
+
+In Google Sheets, use *Format > Text wrapping > Wrap* to view the entire cell as needed, then go back to *Overflow* when done.  
+
+![Screenshot of text entry into template](text-entry-screenshot.png)
+
 ## Edit map title and default text
 Go to `index.html` to edit the map title, introductory text, and footer, which always appears in the sidebar when users click on different places.
 
@@ -74,8 +87,13 @@ This map will automatically display a box under each place description with a Go
 "Frog Bridge, Connecticut"), then hit `Share` button, and copy the *Link to share*, which appears similar to this: `https://goo.gl/maps/gLbedFmJBE31h9t2A`. Paste into the `GoogleMapsLink` column in the data template.
 
 ## Share web links with URL hash
-When a place icon is clicked, its name is added to the hash part of the URL, and appears in your browser like this: ZZZZZZZZZ . This
-enables you to share a particular place because when the map is loaded initially,
+When a place icon is clicked, its name is added to the hash part of the URL, and appears in your browser like this:
+
+`https://handsondataviz.github.io/leaflet-point-map-sidebar/#Frog%20Bridge`
+
+The `%20` represents the unicode symbol for a space between the words "Frog" and "Bridge", just as it appears in the title.
+
+This feature enables you to share a particular place with others on social media, because when the map is loaded initially,
 it activates the place from hash if it exists instead of centering
 on default `mapCenter` (as defined in `settings.js`).
 
