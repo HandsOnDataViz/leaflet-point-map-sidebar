@@ -5,7 +5,7 @@ Demo: https://handsondataviz.github.io/leaflet-points-sidebar/
 
 Google Sheet: https://docs.google.com/spreadsheets/d/1h1rJa-fshPbuzaqabQUjIDmuM2O6f5K0KPEvaAQT568/edit#gid=0
 
-Learn more and see related Leaflet map templates with Google Sheets in our book, Hands-On Data Visualization: https://handsondataviz.org/leaflet.html
+Created by Ilya Ilyankou and Jack Dougherty. Learn more and see related Leaflet map templates with Google Sheets in our book, Hands-On Data Visualization: https://handsondataviz.org/leaflet.html
 
 ## Edit and store data in Google Sheets or CSV
 The map pulls data for each place from a single CSV file that matches our Google Sheets template.
