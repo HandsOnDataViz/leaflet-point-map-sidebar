@@ -18,6 +18,9 @@ and choose `Comma-separated values (.csv)`. Copy the resulting URL to the `dataL
 variable from `settings.js` file. You **do not** need to use a Google API key; the CSV file
 will be available to download for anyone with the link.
 
+## Edit map title and default text
+Go to `index.html` to edit the map title and default text that explains the map and remains in the sidebar when users click on different places.
+
 ## Assigning the same place to 2 or more categories
 If a place needs to belong to two or more groups (also known as categories or themes),
 duplicate its row as many times as needed, and each time modifying its
