@@ -16,7 +16,7 @@ Click `Share` button, and change permissions to *Anyone on the internet with thi
 Then go to `File > Publish to the web > Places`,
 and choose `Comma-separated values (.csv)` as shown below.
 
-![Screenshot: Publish the Google Sheet *Places* as CSV](publish-places.csv.png)
+![Screenshot: Publish the Google Sheet *Places* as CSV](publish-places-csv.png)
 
 Copy and paste the published URL into the `dataLocation`
 variable in the `settings.js` file as shown below. Make sure that the long link ends in: `.../pub?gid=0&single=true&output=csv`
