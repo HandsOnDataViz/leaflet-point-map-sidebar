@@ -2,11 +2,43 @@ var data = {};
 var groups = {};
 var map;
 
-var updateSidebar = function(marker) {
-  
-  location.hash = marker.options.placeInfo.Name
+/*
+ * Given a string `str`, replaces whitespaces with dashes,
+ * and removes nonalphanumeric characters. Used in URL hash.
+ */
+var slugify = function(str) {
+  return str.replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+}
 
-  //location.pathname = location.patnname + '?abc'
+/*
+ * Resets map view to originally defined `mapCenter` and `mapZoom` in settings.js
+ */
+var resetView = function() {
+  map.flyTo( mapCenter, mapZoom );
+  resetSidebar();
+}
+
+/*
+ * Resets sidebar, clearing out place info and leaving title+footer only
+ */
+var resetSidebar = function() {
+    // Make the map title original color
+    $('header').removeClass('black-50');
+
+    // Clear placeInfo containers
+    $('#placeInfo').addClass('dn');
+    $('#placeInfo h2, #placeInfo h3').html('');
+    $('#placeInfo div').html('');
+    $('#googleMaps').addClass('dn').removeClass('dt');
+
+    // Reset hash
+    location.hash = '';
+}
+
+/*
+ * Given a `marker` with data bound to it, update text and images in sidebar
+ */
+var updateSidebar = function(marker) {
 
   // Get data bound to the marker
   var d = marker.options.placeInfo;
@@ -14,20 +46,13 @@ var updateSidebar = function(marker) {
   if (L.DomUtil.hasClass(marker._icon, 'markerActive')) {
     // Deselect current icon
     L.DomUtil.removeClass(marker._icon, 'markerActive');
-
-    // Make the map title original color
-    $('header').removeClass('black-50');
-
-    // Clear placeInfo containers
-    $('#placeInfo h2, #placeInfo h3').html('');
-    $('#placeInfo div').html('');
-    $('#googleMaps').addClass('dn').removeClass('dt');
-
-    // Reset hash
-    location.hash = '';
+    resetSidebar();
   } else {
+    location.hash = d.slug;
+
     // Dim map's title
     $('header').addClass('black-50');
+    $('#placeInfo').removeClass('dn');
 
     // Clear out active markers from all markers
     $('.markerActive').removeClass('markerActive');
@@ -91,6 +116,9 @@ var updateSidebar = function(marker) {
   }
 }
 
+/*
+ * Main function that generates Leaflet markers from read CSV data
+ */
 var addMarkers = function(data) {
 
   var activeMarker;
@@ -98,6 +126,9 @@ var addMarkers = function(data) {
 
   for (var i in data) {
     var d = data[i];
+
+    // Create a slug for URL hash, and add to marker data
+    d['slug'] = slugify(d.Name);
 
     // Add an empty group if doesn't yet exist
     if (!groups[d.Group]) { groups[d.Group] = []; }
@@ -123,7 +154,7 @@ var addMarkers = function(data) {
     // Add this new place marker to an appropriate group
     groups[d.Group].push(m);
 
-    if (d.Name === hashName) { activeMarker = m; }
+    if (d.slug === hashName) { activeMarker = m; }
   }
 
   // Transform each array of markers into layerGroup
@@ -159,6 +190,32 @@ var loadData = function(loc) {
 }
 
 /*
+ * Add home button
+ */
+var addHomeButton = function() {
+
+  var homeControl = L.Control.extend({
+    options: {
+      position: 'bottomright'
+    },
+  
+    onAdd: function(map) {
+      var container = L.DomUtil.create('span');
+      container.className = 'db material-icons home-button black-80';
+      container.innerText = 'map';
+      container.onclick = function() {
+        resetView();
+      }
+
+      return container;
+    }
+  })
+  
+  map.addControl(new homeControl);
+
+}
+
+/*
  * Main function to initialize the map, add baselayer, and add markers
  */
 var initMap = function() {
@@ -181,6 +238,12 @@ var initMap = function() {
   }).addTo(map);
 
   loadData(dataLocation);
+
+  // Add custom `home` control
+  addHomeButton();
+
+  $('#closeButton').on('click', resetView);
 }
 
+// When DOM is loaded, initialize the map
 $('document').ready(initMap);

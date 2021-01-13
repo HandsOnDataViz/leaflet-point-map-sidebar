@@ -50,3 +50,16 @@ a:hover {
 .leaflet-control-layers-expanded label:hover {
   opacity: 0.8;
 }
+
+.home-button {
+  height: 24px;
+  width: 24px;
+  background-color: white;
+  padding: 3px;
+  cursor: pointer !important;
+  border: 1px solid black;
+}
+
+.home-button:hover {
+  background-color: rgb(239, 239, 239);
+}

@@ -52,18 +52,24 @@
 
   <div id="sidebar" class="vh-50 vh-100-ns w-100 w5-ns top-1-ns left-1-ns absolute-ns bg-white ph3 br1 ba b--black-10">
 
-    <header>
-      <h1 class="f3">
+    <header class="pt3">
+      <img src="media/cthumanities.png" alt="CT Humanities logo" style="height: 20px;" />
+
+      <h1 class="f3 black-80 mv2">
         Demo: Leaflet Point Map with Sidebar with Google Sheets
       </h1>
 
       <p>
-        Add introductory text about the map, which will remain at the top of the sidebar when places are clicked.
+        Add introductory text about the map, which will remain at the top
+        of the sidebar when places are clicked.
       </p>
 
     </header>
 
-    <article id="placeInfo">
+    <article id="placeInfo" class="dn">
+      
+      <span id="closeButton" class="material-icons db fr black-40 dim" style="cursor: pointer">close</span>
+
       <h2 class="f4 mv1"></h2>
       <h3 class="f5 black-60 mv1"></h3>
       <div id="gallery"></div>
