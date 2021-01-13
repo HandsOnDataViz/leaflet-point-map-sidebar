@@ -13,14 +13,18 @@ You can store your data remotely (in a published Google Sheet) or locally (as a 
 
 To store your data remotely in Google Sheets, go to our template to *File > Make a Copy* and store in your Google Drive. Your Google Sheet must be public and published.
 Click `Share` button, and change permissions to *Anyone on the internet with this link can view*.
-Then go to `File > Publish to the web > Entire Document`,
-and choose `Comma-separated values (.csv)`. Copy and paste the published URL into the `dataLocation`
-variable in the `settings.js` file as shown below.
+Then go to `File > Publish to the web > Places`,
+and choose `Comma-separated values (.csv)` as shown below.
+
+![Screenshot: Publish the Google Sheet *Places* as CSV](publish-places.csv.png)
+
+Copy and paste the published URL into the `dataLocation`
+variable in the `settings.js` file as shown below. Make sure that the long link ends in: `.../pub?gid=0&single=true&output=csv`
 
 ```
 // Where to load data from. Choose either a local file, such as `data/places.csv`,
 // or a Google Sheets URL (File > Publish to the Web > CSV )
-const dataLocation = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQCz1kNG2vxDke45Q0H8moWaFZZ-dhRSp34EKD_eMVWE-YjJTFDAcxdXydWSJ26JF4Ap4zlaZD1p9oi/pub?output=csv';
+const dataLocation = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQCz1kNG2vxDke45Q0H8moWaFZZ-dhRSp34EKD_eMVWE-YjJTFDAcxdXydWSJ26JF4Ap4zlaZD1p9oi/pub?gid=0&single=true&output=csv';
 ```
 
 Or, after you finish creating your map data in Google Sheets, you can *File > Download* as a CSV file and store it locally in your online copy of the GitHub folder, and enter the file pathname (such as `data/places.csv`) into the `dataLocation` variable `settings.js` file above. Storing your data locally with the map code template is a good strategy for long-term preservation, because you no longer depend on a remote link to the Google Sheets platform. Also, you can always re-edit the CSV file as needed on GitHub or with a spreadsheet tool.
