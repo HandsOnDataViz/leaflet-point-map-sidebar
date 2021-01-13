@@ -72,7 +72,7 @@ duplicate its row as many times as needed, and each time modifying its
 
 ## Add images
 Each place can have up to 5 images, which you upload to a subfolder in your GitHub repo and enter the pathname into the Google Sheets template, such as: `media/frog-bridge.jpg`. We recommend that you reduce image sizes to approximately 1200 x 1000 pixels or less to ensure speedy display. Only the 1st of 5 images is shown in the sidebar. To scroll through the gallery, click the 1st image to bring up a full-screen lightbox interface. The lightbox will say how many images there are, and will show
-a caption, source, and link (if available) for each image. You may wish to enter "Click image for more" into the first caption to signal to users that more images are available to view.
+a caption, source, and link (if available) for each image.
 
 ## Add custom thumbnail photo icons
 Each place can have 1 custom thumbnail photo icon. Make a copy of your main image, then use a photo editor to crop and reduce the size to 64 x 64 pixels square, and upload into your GitHub repo and enter the pathname into the Google Sheets template, such as: `media/frog-bridge-icon.jpg`.
@@ -92,14 +92,12 @@ To make icons appear in locations on your map, you need to geocode your data, wh
 
 ## Add Google Maps links for directions
 This map will automatically display a box under each place description with a Google Maps link for directions, if you enter the proper Google Maps link into your data. Use [Google Maps](https://www.google.com/maps) to search a place (such as
-"Frog Bridge, Connecticut"), then hit `Share` button, and copy the *Link to share*, which appears similar to this: `https://goo.gl/maps/gLbedFmJBE31h9t2A`. Paste into the `GoogleMapsLink` column in the data template.
+"Frog Bridge, Connecticut"), then select `Share` button, and copy the *Link to share*, which appears similar to this: `https://goo.gl/maps/gLbedFmJBE31h9t2A`. Paste into the `GoogleMapsLink` column in the data template.
 
 ## Share web links with URL hash
 When a place icon is clicked, its name is added to the hash part of the URL, and appears in your browser like this:
 
-`https://handsondataviz.github.io/leaflet-point-map-sidebar/#Frog%20Bridge`
-
-The `%20` represents the unicode symbol for a space between the words "Frog" and "Bridge", just as it appears in the title.
+`https://handsondataviz.github.io/leaflet-point-map-sidebar/#Frog-Bridge`
 
 This feature enables you to share a particular place with others on social media, because when the map is loaded initially,
 it activates the place from hash if it exists instead of centering
