@@ -81,10 +81,6 @@ var updateSidebar = function(marker) {
 
         if (d[idx]) {
 
-          if (i === 2) {  // If two or more, show gallery icon 
-            $('#galleryIcon').show();
-          }
-
           var source = "<em class='normal'>" + d[idx + 'Source'] + '</em>';
 
           if (source && d[idx + 'SourceLink']) {
@@ -106,6 +102,11 @@ var updateSidebar = function(marker) {
             $('#gallery').append(
               $('<p/>', { class: 'f6 black-50 mt1', html: d[idx + 'Caption'] + ' ' + source })
             );
+          }
+
+          if (i === 2) {
+            $('#gallery > a:first-child').append('<span class="material-icons arrow arrow-right white-90">navigate_next</span>')
+            $('#gallery > a:first-child').append('<span class="material-icons arrow arrow-left white-90">navigate_before</span>')
           }
 
         } else {
