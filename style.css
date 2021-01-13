@@ -63,3 +63,12 @@ a:hover {
 .home-button:hover {
   background-color: rgb(239, 239, 239);
 }
+
+#galleryIcon {
+  height: 0;
+  top: 40px;
+  left: 100%;
+  margin-left: -40px;
+  position: relative;
+  z-index: 999;
+}

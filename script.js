@@ -73,12 +73,17 @@ var updateSidebar = function(marker) {
       }
 
       $('#gallery').html('');
+      $('#galleryIcon').hide();
 
       // Load up to 5 images
       for (var i = 1; i <= 5; i++) {
         var idx = 'Image' + i;
 
         if (d[idx]) {
+
+          if (i === 2) {  // If two or more, show gallery icon 
+            $('#galleryIcon').show();
+          }
 
           var source = "<em class='normal'>" + d[idx + 'Source'] + '</em>';
 
@@ -103,6 +108,8 @@ var updateSidebar = function(marker) {
             );
           }
 
+        } else {
+          break;
         }
       }
 
