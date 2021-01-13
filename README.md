@@ -1,7 +1,9 @@
 # leaflet-point-map-sidebar
 Leaflet Point Map with Sidebar with Google Sheets
 
-Demo: https://handsondataviz.github.io/leaflet-point-map-sidebar/
+## Live links (replace with your own)
+
+Demo map: https://handsondataviz.github.io/leaflet-point-map-sidebar/
 
 Google Sheet: https://docs.google.com/spreadsheets/d/1h1rJa-fshPbuzaqabQUjIDmuM2O6f5K0KPEvaAQT568/edit#gid=0
 
