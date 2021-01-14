@@ -1,5 +1,5 @@
 # leaflet-point-map-sidebar
-Leaflet Point Map with Sidebar with Google Sheets
+Leaflet Point Map with Sidebar with Google Sheets -- Best to display points as custom thumbnail photo icons, organized by category, with a sidebar to show a multi-paragraph description and multi-image gallery for each point. Edit and host all text in a linked Google Sheet or CSV file, with pathnames to images stored in your GitHub repo.
 
 ![Preview](preview.png)
 
@@ -9,7 +9,7 @@ Demo map: https://handsondataviz.github.io/leaflet-point-map-sidebar/
 
 Google Sheet: https://docs.google.com/spreadsheets/d/1h1rJa-fshPbuzaqabQUjIDmuM2O6f5K0KPEvaAQT568/edit#gid=0
 
-Created by Ilya Ilyankou and Jack Dougherty. Learn more and see related Leaflet map templates with Google Sheets in our book, Hands-On Data Visualization: https://handsondataviz.org/leaflet.html
+Created by Ilya Ilyankou and Jack Dougherty. Learn how to create your own copy and see related Leaflet map templates in our book, *Hands-On Data Visualization*: https://handsondataviz.org/leaflet.html
 
 ## Edit and store data in Google Sheets or CSV
 The map pulls data for each place from a single CSV file that matches our Google Sheets template.

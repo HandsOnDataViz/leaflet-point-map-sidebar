@@ -158,7 +158,7 @@ var addMarkers = function(data) {
       map.flyTo(this._latlng, 11);
       updateSidebar(this);
     });
-    
+
     // Add this new place marker to an appropriate group
     groups[d.Group].push(m);
 
@@ -186,7 +186,7 @@ var addMarkers = function(data) {
  * from Google Sheets) using PapaParse
  */
 var loadData = function(loc) {
-  
+
   Papa.parse(loc, {
     header: true,
     download: true,
@@ -206,7 +206,7 @@ var addHomeButton = function() {
     options: {
       position: 'bottomright'
     },
-  
+
     onAdd: function(map) {
       var container = L.DomUtil.create('span');
       container.className = 'db material-icons home-button black-80';
@@ -218,7 +218,7 @@ var addHomeButton = function() {
       return container;
     }
   })
-  
+
   map.addControl(new homeControl);
 
 }
@@ -237,7 +237,7 @@ var initMap = function() {
 
   // Add zoom control to the bottom-right corner
   L.control.zoom({ position: 'bottomright' }).addTo(map);
-  
+
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -246,6 +246,10 @@ var initMap = function() {
   }).addTo(map);
 
   loadData(dataLocation);
+
+  // customize link to view source code
+  map.attributionControl
+  .setPrefix('View <a href="http://github.com/handsondataviz/leaflet-point-map-sidebar">code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
 
   // Add custom `home` control
   addHomeButton();
